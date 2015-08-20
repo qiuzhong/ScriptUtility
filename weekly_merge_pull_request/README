@@ -1,0 +1,4 @@
+Usage:
+1. Update the crosswalk-test-suite to the status of Thursday.
+2. Write the frozen commit id to WW%D_Release_ID file.
+3. run ./weekly_merge_pr.py -f
