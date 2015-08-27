@@ -1,4 +1,5 @@
 Usage:
 1. Update the crosswalk-test-suite to the status of Thursday.
-2. Write the frozen commit id to WW%D_Release_ID file.
+2. Write the frozen commit id to WW<XX>_Release_ID file.
+XX = The week of this year + 1
 3. run ./weekly_merge_pr.py -f

@@ -96,7 +96,7 @@ def main():
     pr = None
     if args.isfile:
         if args.last_commit_id and args.this_commit_id:
-            pr = WeeklyPR(args.last_commit_id, args.this_commit_id, cts_dir, commit_file= True)
+            pr = WeeklyPR(args.last_commit_id, args.this_commit_id, cts_dir, commit_file = True)
         else:
             last_commit_id_file = 'WW%02d_Release_ID' % int(time.strftime("%W"))
             this_commit_id_file = 'WW%02d_Release_ID' % (int(time.strftime('%W')) + 1)
@@ -106,8 +106,9 @@ def main():
         if args.last_commit_id and args.this_commit_id:
             pr = WeeklyPR(last_commit_id, this_commit_id, cts_dir)
 
-    pr.get_week_log()
-    pr.sort_weekly_info()
+    if pr:
+        pr.get_week_log()
+        pr.sort_weekly_info()
 
 
 if __name__ == '__main__':
