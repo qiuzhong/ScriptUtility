@@ -10,8 +10,8 @@ npm config set https-proxy https://<HTTPS_PROXY_SERVER>:<HTTPS_PORT>
 In Intel, we use the following configuration for npm
 
 ```
-npm config proxy http://child-prc.intel.com:913
-npm config https-proxy http://child-prc.intel.com:913
+npm config set proxy http://child-prc.intel.com:913
+npm config set https-proxy http://child-prc.intel.com:913
 ```
 
 Reference:
