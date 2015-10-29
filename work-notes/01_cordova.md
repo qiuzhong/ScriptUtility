@@ -14,7 +14,7 @@ The cordova test suites contain the following test suites:
 
     ```
     "main-version": "17.45.426.0",
-    "crosswalk-branch": "stable",
+    "crosswalk-branch": "canary",
     ```
 
 3. Install **crosswalk-17.45.426.0.aar** file locally and make sure **~/.m2/repository/org/xwalk/** has the according directories, use command:
