@@ -10,8 +10,19 @@ The cordova test suites contain the following test suites:
 
 ## How to pack cordova test suite packages on master branch?
 1. Make sure **crosswalk-test-suite/tools/cordova_plugin/cordova-plugin-crosswalk-webview** exist.
-2. Make sure **crosswalk-test-suite/VERSION** matches to the version your want.
-3. Install **crosswalk-${VERSION}.aar** file locally and make sure **~/.m2/repository/org/xwalk/** has the according directories.
+2. Make sure **crosswalk-test-suite/VERSION** matches to the version your want. Here is an example:
+
+    ```
+    "main-version": "17.45.426.0",
+    "crosswalk-branch": "stable",
+    ```
+
+3. Install **crosswalk-17.45.426.0.aar** file locally and make sure **~/.m2/repository/org/xwalk/** has the according directories, use command:
+
+    ```
+    mvn install:install-file -DgroupId=org.xwalk -DartifactId=xwalk_core_library -Dversion=17.45.426.0 -Dpackaging=aar -Dfile=/data/jiajiax_shared/pkg_tools/crosswalk-17.45.426.0.aar -DgeneratePom=true
+    ```
+
 4. Modify **crosswalk-test-suite/tools/cordova_plugin/cordova-plugin-crosswalk-webview/platforms/android/xwalk.gradle**, and change 
 
     ```
@@ -29,4 +40,16 @@ The cordova test suites contain the following test suites:
 
     ```Bash
     ./pack.py -t cordova --sub-version 4.x -a arm -m embedded
+    ```
+
+6. At present, CIRC and Eh cordova sample apps cannot use this modification above as there are some problems with the cca tool. So you have to hack
+**crosswalk-test-suite/tools/cordova_plugin/cordova-plugin-crosswalk-webview/platforms/android/xwalk.gradle**
+Change
+
+    ```
+    ext.xwalkVersion = getConfigPreference("xwalkVersion")
+    ```
+to
+    ```
+    ext.xwalkVersion = "17.45.426.0"
     ```
