@@ -36,13 +36,20 @@ The cordova test suites contain the following test suites:
     mavenLocal()
     ```
 
-5. Go to **crosswalk-test-suite/tools/build**, run
+5. Go to the root directory of each test suite, run
 
-    ```Bash
-    ./pack.py -t cordova --sub-version 4.x -a arm -m embedded
+    ```
+    ../../pack.py -t cordova --sub-version 4.x -a arm -m embedded
     ```
 
-6. At present, CIRC and Eh cordova sample apps cannot use this modification above as there are some problems with the cca tool. So you have to hack
+## How to pack cordova sample apps apk on master branch?
+6. Go to **crosswalk-test-suite/tools/build**, run
+
+    ```Bash
+    ./pack_cordova_sample.py -n helloworld --sub-version 4.x -a arm -m embedded
+    ```
+
+7. At present, CIRC and Eh cordova sample apps cannot use this modification above as there are some problems with the cca tool. So you have to hack
 **crosswalk-test-suite/tools/cordova_plugin/cordova-plugin-crosswalk-webview/platforms/android/xwalk.gradle**
 Change
 
@@ -53,3 +60,4 @@ to
     ```
     ext.xwalkVersion = "17.45.426.0"
     ```
+Then, go to step 6.
