@@ -39,7 +39,7 @@ The cordova test suites contain the following test suites:
 5. Go to the root directory of each test suite, run
 
     ```
-    ../../pack.py -t cordova --sub-version 4.x -a arm -m embedded
+    ../../tools/build/pack.py -t cordova --sub-version 4.x -a arm -m embedded
     ```
 
 ## How to pack cordova sample apps apk on master branch?
