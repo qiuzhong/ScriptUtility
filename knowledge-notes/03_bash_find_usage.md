@@ -12,3 +12,8 @@ find . -name '*.zip' -print
 find . -name '*.zip' -exec rm {} \;
 ```
 
+## How to remove the .git directory in current directory and its subdirectories recursively?
+
+```Bash
+find . -name '.git' | xargs rm -fr
+```
