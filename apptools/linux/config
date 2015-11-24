@@ -1,0 +1,11 @@
+CTS_DIR=/home/orange/01_qiuzhong/00-crosswalk-project/crosswalk-test-suite-apptools
+
+APPTOOLS_TC_LINUX="
+apptools/apptools-linux-tests
+apptools/apptools-sampleapp-tests
+usecase/usecase-apptools-tests
+"
+
+USE_PATCH="Yes"
+UPDATE_CODE="Yes"
+UPDATE_XWALK_VERSION="Yes"
