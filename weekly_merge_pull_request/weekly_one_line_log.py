@@ -50,9 +50,14 @@ class WeeklyCommitTitle(object):
 
 
     def write_weekly_titles(self):
-        # print(self.weekly_info)
+        '''Get the commit titles and write them to a text file.'''
+        
+        lines = self.weekly_info.strip().split('\n')
+        titles = [line[41:] for line in lines]
+
         with open('weekly_commit_titles.txt', 'w') as f:
-            f.write(self.weekly_info)
+            for title in titles:
+                f.write(title + '\n')
 
 
 def main():
