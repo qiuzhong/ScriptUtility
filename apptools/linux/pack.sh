@@ -18,7 +18,7 @@ source ${VERSION_FILE}
 source ${PWD}/config
 
 DEST_DIR=${PWD}/${CROSSWALK_VERSION}
-PATCH_PACK_DEB_PY=${PWD}/patch/pack_deb.py
+PATCH_PACK_DEB_PY=${PATCH_DIR}/pack_deb.py
 
 update_cts() {
     cd $1

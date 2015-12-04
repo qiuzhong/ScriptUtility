@@ -1,4 +1,5 @@
 CTS_DIR=/home/orange/01_qiuzhong/00-crosswalk-project/crosswalk-test-suite-apptools
+PATCH_DIR="/home/orange/01_qiuzhong/04-work/patch/apptools/linux"
 
 APPTOOLS_TC_LINUX="
 apptools/apptools-linux-tests
