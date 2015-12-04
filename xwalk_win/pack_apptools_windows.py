@@ -7,7 +7,15 @@ import shutil
 
 
 XWALK_DIR = r"C:\xwalk"
-CROSSWALK_VERSION = "17.46.443.0"
+CROSSWALK_VERSION = None
+xwalk_ver_file = 'xwalk_version.txt'
+try:
+	with open(xwalk_ver_file) as f:
+		CROSSWALK_VERSION = f.read().strip()
+except IOError as e:
+	print('Failed to open file %s' % xwalk_ver_file)
+	sys.exit(1)
+
 APPTOOLS_DIR = os.path.join(XWALK_DIR, 'release', 'apptools')
 ZIP_DIR = os.path.join(APPTOOLS_DIR, CROSSWALK_VERSION)
 if not os.path.exists(ZIP_DIR):
