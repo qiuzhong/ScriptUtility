@@ -49,7 +49,7 @@ update_version() {
     fi 
 
     sed -i "s|\"main-version\": \"\([^\"]*\)\"|\"main-version\": \"$2\"|g" VERSION
-    if [[ $1 == "N" ]]; then
+    if [[ $2 == ${N_PLUS_1_VER} ]]; then
         sed -i "s/beta/canary/" $CTS_DIR/VERSION
     fi
     cd -
@@ -327,17 +327,17 @@ pack_embeddingapi_tc() {
 
 # update_version N ${N_1_VER}
 # copy_sdk N ${N_1_VER}
-# pack_sampleapp_tc N arm shared ${N1}
+# # pack_sampleapp_tc N arm shared ${N1}
 # pack_sampleapp_tc N x86 shared ${N1}
 
 # update_version N ${N_2_VER}
 # copy_sdk N ${N_2_VER}
-# pack_sampleapp_tc N arm shared ${N2}
+# # pack_sampleapp_tc N arm shared ${N2}
 # pack_sampleapp_tc N x86 shared ${N2}
 
 # update_version N ${N_3_VER}
 # copy_sdk N ${N_3_VER}
-# pack_sampleapp_tc N arm shared ${N3}
+# # pack_sampleapp_tc N arm shared ${N3}
 # pack_sampleapp_tc N x86 shared ${N3}
 
 ###############################################################################
@@ -345,50 +345,50 @@ pack_embeddingapi_tc() {
 ###############################################################################
 # update_version N ${N_VER}
 # copy_sdk N ${N_VER}
-# copy_sdk_webview N ${N_VER} arm
-# pack_usecase_tc N arm shared ${N}
+# # copy_sdk_webview N ${N_VER} arm
+# # pack_usecase_tc N arm shared ${N}
 # copy_sdk_webview N ${N_VER} x86
 # pack_usecase_tc N x86 shared ${N}
 
-# update_version N1 ${N_VER}
-# copy_sdk N1 ${N_VER}
+update_version N1 ${N_VER}
+copy_sdk N1 ${N_VER}
 # copy_sdk_webview N1 ${N_VER} arm
 # pack_usecase_tc N1 arm shared ${N}
-# copy_sdk_webview N1 ${N_VER} x86
-# pack_usecase_tc N1 x86 shared ${N}
+copy_sdk_webview N1 ${N_VER} x86
+pack_usecase_tc N1 x86 shared ${N}
 
 # update_version N2 ${N_VER}
 # copy_sdk N2 ${N_VER}
-# copy_sdk_webview N2 ${N_VER} arm
-# pack_usecase_tc N2 arm shared ${N}
+# # copy_sdk_webview N2 ${N_VER} arm
+# # pack_usecase_tc N2 arm shared ${N}
 # copy_sdk_webview N2 ${N_VER} x86
 # pack_usecase_tc N2 x86 shared ${N}
 
 # update_version N3 ${N_VER}
 # copy_sdk N3 ${N_VER}
-# copy_sdk_webview N3 ${N_VER} arm
-# pack_usecase_tc N3 arm shared ${N}
+# # copy_sdk_webview N3 ${N_VER} arm
+# # pack_usecase_tc N3 arm shared ${N}
 # copy_sdk_webview N3 ${N_VER} x86
 # pack_usecase_tc N3 x86 shared ${N}
 
-update_version N1 ${N_1_VER}
-copy_sdk N1 ${N_1_VER}
-copy_sdk_webview N1 ${N_1_VER} arm
-pack_usecase_tc N1 arm shared ${N1}
-copy_sdk_webview N1 ${N_1_VER} x86
-pack_usecase_tc N1 x86 shared ${N1}
+# update_version N1 ${N_1_VER}
+# copy_sdk N1 ${N_1_VER}
+# # copy_sdk_webview N1 ${N_1_VER} arm
+# # pack_usecase_tc N1 arm shared ${N1}
+# copy_sdk_webview N1 ${N_1_VER} x86
+# pack_usecase_tc N1 x86 shared ${N1}
 
 # update_version N2 ${N_2_VER}
 # copy_sdk N2 ${N_2_VER}
-# copy_sdk_webview N2 ${N_2_VER} arm
-# pack_usecase_tc N2 arm shared ${N2}
+# # copy_sdk_webview N2 ${N_2_VER} arm
+# # pack_usecase_tc N2 arm shared ${N2}
 # copy_sdk_webview N2 ${N_2_VER} x86
 # pack_usecase_tc N2 x86 shared ${N2}
 
 # update_version N3 ${N_3_VER}
 # copy_sdk N3 ${N_3_VER}
-# copy_sdk_webview N3 ${N_3_VER} arm
-# pack_usecase_tc N3 arm shared ${N3}
+# # copy_sdk_webview N3 ${N_3_VER} arm
+# # pack_usecase_tc N3 arm shared ${N3}
 # copy_sdk_webview N3 ${N_3_VER} x86
 # pack_usecase_tc N3 x86 shared ${N3}
 
@@ -412,10 +412,10 @@ pack_usecase_tc N1 x86 shared ${N1}
 ###############################################################################
 # WebAPI Test Suites
 ###############################################################################
-# update_version N1 ${N_1_VER}
-# copy_sdk N1 ${N_1_VER}
+update_version N1 ${N_1_VER}
+copy_sdk N1 ${N_1_VER}
 # pack_webapi_tc N1 arm shared ${N1}
-# pack_webapi_tc N1 x86 shared ${N1}
+pack_webapi_tc N1 x86 shared ${N1}
 
 # N=16 15.16
 # update_version N2 ${N_2_VER}
@@ -428,44 +428,44 @@ pack_usecase_tc N1 x86 shared ${N1}
 # Embedding API Test Suites
 ###############################################################################
 # update_version N ${N_VER}
-# copy_sdk_webview N ${N_VER} arm
-# pack_embeddingapi_tc N arm shared ${N}
+# # copy_sdk_webview N ${N_VER} arm
+# # pack_embeddingapi_tc N arm shared ${N}
 # copy_sdk_webview N ${N_VER} x86
 # pack_embeddingapi_tc N x86 shared ${N}
 
 # update_version N1 ${N_VER}
-# copy_sdk_webview N1 ${N_VER} arm
-# pack_embeddingapi_tc N1 arm shared ${N}
+# # copy_sdk_webview N1 ${N_VER} arm
+# # pack_embeddingapi_tc N1 arm shared ${N}
 # copy_sdk_webview N1 ${N_VER} x86
 # pack_embeddingapi_tc N1 x86 shared ${N}
 
 # update_version N2 ${N_VER} 
-# copy_sdk_webview N2 ${N_VER} arm
-# pack_embeddingapi_tc N2 arm shared ${N}
+# # copy_sdk_webview N2 ${N_VER} arm
+# # pack_embeddingapi_tc N2 arm shared ${N}
 # copy_sdk_webview N2 ${N_VER} x86
 # pack_embeddingapi_tc N2 x86 shared ${N}
 
 # update_version N3 ${N_VER}
-# copy_sdk_webview N3 ${N_VER} arm
-# pack_embeddingapi_tc N3 arm shared ${N}
+# # copy_sdk_webview N3 ${N_VER} arm
+# # pack_embeddingapi_tc N3 arm shared ${N}
 # copy_sdk_webview N3 ${N_VER} x86
 # pack_embeddingapi_tc N3 x86 shared ${N}
 
 # update_version N1 ${N_1_VER}
-# copy_sdk_webview N1 ${N_1_VER} arm
-# pack_embeddingapi_tc N1 arm shared ${N1}
+# # copy_sdk_webview N1 ${N_1_VER} arm
+# # pack_embeddingapi_tc N1 arm shared ${N1}
 # copy_sdk_webview N1 ${N_1_VER} x86
 # pack_embeddingapi_tc N1 x86 shared ${N1}
 
 # update_version N2 ${N_2_VER}
-# copy_sdk_webview N2 ${N_2_VER} arm
-# pack_embeddingapi_tc N2 arm shared ${N2}
+# # copy_sdk_webview N2 ${N_2_VER} arm
+# # pack_embeddingapi_tc N2 arm shared ${N2}
 # copy_sdk_webview N2 ${N_2_VER} x86
 # pack_embeddingapi_tc N2 x86 shared ${N2}
 
 # update_version N3 ${N_3_VER}
-# copy_sdk_webview N3 ${N_3_VER} arm
-# pack_embeddingapi_tc N3 arm shared ${N3}
+# # copy_sdk_webview N3 ${N_3_VER} arm
+# # pack_embeddingapi_tc N3 arm shared ${N3}
 # copy_sdk_webview N3 ${N_3_VER} x86
 # pack_embeddingapi_tc N3 x86 shared ${N3}
 
@@ -476,7 +476,7 @@ pack_usecase_tc N1 x86 shared ${N1}
 # copy_sdk_webview N2 ${N_1_VER} x86
 # pack_embeddingapi_tc N2 x86 shared ${N1}
 
-# # 14.16
+# 14.16
 # update_version N3 ${N_1_VER}
 # copy_sdk_webview N3 ${N_1_VER} arm
 # pack_embeddingapi_tc N3 arm shared ${N1}
