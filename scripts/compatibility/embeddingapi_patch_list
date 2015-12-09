@@ -1,0 +1,8 @@
+PATCH_LIST="
+embedding-api-android-tests/embeddingapi/src/org/xwalk/embedding/test/v5/XWalkViewTest.java
+embedding-api-android-tests/tests.full.xml
+embedding-api-android-tests/tests_v5.xml
+embedding-asyncapi-android-tests/embeddingapi/src/org/xwalk/embedding/test/v5/XWalkViewTestAsync.java
+embedding-asyncapi-android-tests/tests.full.xml
+embedding-asyncapi-android-tests/tests_v5.xml
+"
