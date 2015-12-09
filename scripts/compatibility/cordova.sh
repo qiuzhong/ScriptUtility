@@ -225,6 +225,4 @@ update_cordova_tc() {
         mv -fv *.zip ${tc_name}-${DIR_NAME}.${DIR_NAME}-${tag}-${mode}.cordova.zip
         mv -fv ${tc_name}-${DIR_NAME}.${DIR_NAME}-${tag}-${mode}.cordova.zip ${DEST_DIR}/testsuites/cordova/crosswalk-${DIR_NAME}/${arch}
     done
-
-
 }

@@ -1,4 +1,8 @@
-N_VER="17.46.448.0"
+###############################################################################
+# Need to update!
+###############################################################################
+
+N_VER="17.46.448.1"
 N_1_VER="16.45.421.18"
 N_2_VER="15.44.384.13"
 N_3_VER="14.43.343.25"
@@ -12,6 +16,10 @@ NPLUS1="18"
 
 ALPHA="1.5.0"
 ALPHA_1="1.4.0"
+
+###############################################################################
+# End to update!
+###############################################################################
 
 MODES="
 embedded
@@ -34,11 +42,23 @@ WORKSPACE="/home/orange/01_qiuzhong/work_space/compatibility"
 PKG_TOOLS_DIR="/data/jiaxxx_shared/pkg_tools"
 PKG_TOOLS_DIR64="/data/jiaxxx_shared/pkg_tools_64"
 DEMOEX_DIR="/home/orange/00_jiajia/work_space/release/demo-express"
-DEST_DIR="/home/orange/01_qiuzhong/temp/compatibility/17"
 GRADLE="platforms/android/xwalk.gradle"
 
+
+###############################################################################
+# Need to update!
 ###############################################################################
 
+DEST_DIR="/home/orange/01_qiuzhong/temp/compatibility/17"
+
+###############################################################################
+# End to update!
+###############################################################################
+
+
+###############################################################################
+# XWALK Test Suites List
+###############################################################################
 XWALK_SAMPLE_APPS_TC="
 misc/sampleapp-android-tests
 "
@@ -64,6 +84,8 @@ embeddingapi/embedding-api-android-tests
 embeddingapi/embedding-asyncapi-android-tests
 "
 
+###############################################################################
+# Cordova Test Suites List
 ###############################################################################
 CORDOVA_CIRC_URL="https://github.com/flackr/circ.git"
 CORDOVA_EH_URL="https://github.com/MobileChromeApps/workshop-cca-eh.git"
