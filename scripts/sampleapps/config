@@ -1,0 +1,10 @@
+OFFICIAL_RELEASE_FLAG="false"
+
+OFFICIAL_ROOT_DIR="/home/orange/01_qiuzhong/work_space/samplesapp"
+OFFICIAL_DEST_BINARY_DIR="/mnt/otcqa/Sampleapp_SourceCode_And_Binary"
+
+TEST_ROOT_DIR="/home/orange/01_qiuzhong/work_space/samplesapp_test"
+TEST_DEST_BINARY_DIR="/home/orange/01_qiuzhong/temp/xwalk_sampleapp"
+
+
+
