@@ -1,4 +1,4 @@
-OFFICIAL_RELEASE_FLAG="false"
+OFFICIAL_RELEASE_FLAG="true"
 
 OFFICIAL_ROOT_DIR="/home/orange/01_qiuzhong/work_space/samplesapp"
 OFFICIAL_DEST_BINARY_DIR="/mnt/otcqa/Sampleapp_SourceCode_And_Binary"

@@ -303,3 +303,6 @@ modify_extensions_android_config
 
 
 start_release_work
+
+clean_dir crosswalk-samples
+clean_dir Sampleapp_binary

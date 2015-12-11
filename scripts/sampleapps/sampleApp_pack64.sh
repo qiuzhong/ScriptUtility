@@ -280,7 +280,7 @@ start_release_work() {
         build_apk embedded x86_64
         build_apk embedded arm64-v8a
         build_apk shared arm64-v8a
-        build_apk shared armeabi-v7a
+        build_apk shared arm64-v8a
 
         rm -rf Sampleapp_sourcecode.zip
 
@@ -324,3 +324,7 @@ modify_extensions_android_config
 
 
 start_release_work
+
+clean_dir crosswalk-samples
+clean_dir Sampleapp_binary
+
