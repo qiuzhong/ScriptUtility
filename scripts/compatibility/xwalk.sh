@@ -50,7 +50,7 @@ update_version() {
 
     sed -i "s|\"main-version\": \"\([^\"]*\)\"|\"main-version\": \"$2\"|g" VERSION
     if [[ $2 == ${N_PLUS_1_VER} ]]; then
-        sed -i "s/beta/canary/" $CTS_DIR/VERSION
+        sed -i "s/beta/canary/" VERSION
     fi
     cd -
 }
