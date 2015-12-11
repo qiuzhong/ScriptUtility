@@ -7,6 +7,6 @@ apptools/apptools-sampleapp-tests
 usecase/usecase-apptools-tests
 "
 
-USE_PATCH="Yes"
+USE_PATCH="No"
 UPDATE_CODE="Yes"
 UPDATE_XWALK_VERSION="Yes"

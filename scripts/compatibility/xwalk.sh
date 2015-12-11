@@ -362,7 +362,7 @@ pack_embeddingapi_tc() {
 # pack_usecase_tc N x86 shared ${N}
 
 
-# 17.16
+# 16.17
 
 # update_version N1 ${N_VER}
 # copy_sdk N1 ${N_VER}
@@ -372,7 +372,7 @@ pack_embeddingapi_tc() {
 # pack_usecase_tc N1 x86 shared ${N}
 
 
-# 17.15
+# 15.17
 
 # update_version N2 ${N_VER}
 # copy_sdk N2 ${N_VER}
@@ -382,7 +382,7 @@ pack_embeddingapi_tc() {
 # pack_usecase_tc N2 x86 shared ${N}
 
 
-# 17.14
+# 14.17
 
 # update_version N3 ${N_VER}
 # copy_sdk N3 ${N_VER}
@@ -421,23 +421,6 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N3 ${N_3_VER} x86
 # pack_usecase_tc N3 x86 shared ${N3}
 
-# N=16
-
-# update_version N2 ${N_1_VER}
-# copy_sdk N2 ${N_1_VER}
-# copy_sdk_webview N2 ${N_1_VER} arm
-# pack_usecase_tc N2 arm shared ${N1}
-# copy_sdk_webview N2 ${N_1_VER} x86
-# pack_usecase_tc N2 x86 shared ${N1}
-
-# update_version N3 ${N_1_VER}
-# copy_sdk N3 ${N_1_VER}
-# copy_sdk_webview N3 ${N_1_VER} arm
-# pack_usecase_tc N3 arm shared ${N1}
-# copy_sdk_webview N3 ${N_1_VER} x86
-# pack_usecase_tc N3 x86 shared ${N1}
-
-# End N=16
 
 ###############################################################################
 # WebAPI Test Suites
@@ -473,11 +456,11 @@ pack_embeddingapi_tc() {
 
 # 16.17
 
-update_version N1 ${N_VER}
-# copy_sdk_webview N1 ${N_VER} arm
-# pack_embeddingapi_tc N1 arm shared ${N}
-copy_sdk_webview N1 ${N_VER} x86
-pack_embeddingapi_tc N1 x86 shared ${N}
+# update_version N1 ${N_VER}
+# # copy_sdk_webview N1 ${N_VER} arm
+# # pack_embeddingapi_tc N1 arm shared ${N}
+# copy_sdk_webview N1 ${N_VER} x86
+# pack_embeddingapi_tc N1 x86 shared ${N}
 
 
 # 15.17
@@ -489,7 +472,7 @@ pack_embeddingapi_tc N1 x86 shared ${N}
 # pack_embeddingapi_tc N2 x86 shared ${N}
 
 
-# # 14.17
+# 14.17
 
 # update_version N3 ${N_VER}
 # # copy_sdk_webview N3 ${N_VER} arm

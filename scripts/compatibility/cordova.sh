@@ -226,3 +226,11 @@ update_cordova_tc() {
         mv -fv ${tc_name}-${DIR_NAME}.${DIR_NAME}-${tag}-${mode}.cordova.zip ${DEST_DIR}/testsuites/cordova/crosswalk-${DIR_NAME}/${arch}
     done
 }
+
+
+###############################################################################
+#   Building Cordova-related apks and test suites.
+#   
+###############################################################################
+
+update_code N2

@@ -155,13 +155,13 @@ zero_text_file() {
 # check_sdk_all ${N_3_VER} arm
 # check_sdk_all ${N_3_VER} x86
 
+XWALK_VERSION="18.46.452.0"
+zero_text_file ${XWALK_VERSION}
 
-zero_text_file 17.46.448.2
+check_sdk ${XWALK_VERSION}
+check_sdk_all ${XWALK_VERSION} arm
+check_sdk_all ${XWALK_VERSION} x86
 
-check_sdk 17.46.448.2
-check_sdk_all 17.46.448.2 arm
-check_sdk_all 17.46.448.2 x86
-
-check_sdk64 17.46.448.2
-check_sdk_all64 17.46.448.2 arm64
-check_sdk_all64 17.46.448.2 x86_64
+check_sdk64 ${XWALK_VERSION}
+check_sdk_all64 ${XWALK_VERSION} arm64
+check_sdk_all64 ${XWALK_VERSION} x86_64
