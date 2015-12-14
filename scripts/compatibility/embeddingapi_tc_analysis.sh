@@ -13,9 +13,9 @@ source ${CWD}/config
 
 TEST_FLAG="true"
 
-CTS_DIR="/home/apple/02_qiuzhong/workspace/crosswalk-test-suite"
-OFFICAL_REFIX_DEST_DIR="/mnt/suites_storage/live/android"
-TEST_PREFIX_DEST_DIR="/home/apple/02_qiuzhong/temp/live/android"
+CTS_DIR="/home/orange/01_qiuzhong/work_space/release/crosswalk-test-suite-test"
+OFFICAL_REFIX_DEST_DIR="/data/TestSuites_Storage/live/android"
+TEST_PREFIX_DEST_DIR="/home/orange/01_qiuzhong/temp/live/android"
 
 if [ ${TEST_FLAG} == "true" ]; then
 	DEST_DIR=${TEST_PREFIX_DEST_DIR}
@@ -23,10 +23,10 @@ else
 	DEST_DIR=${OFFICAL_REFIX_DEST_DIR}
 fi
 
-VERSION=${N_VER}
+XWALK_VERSION=${N_VER}
 BRANCH="master"
 
-COVERITY_DIR=${DEST_DIR}/${BRANCH}/${VERSION}/coverity
+COVERITY_DIR=${DEST_DIR}/${BRANCH}/${XWALK_VERSION}/coverity
 
 init_coverity() {
 	for embeddingapi_tc in ${XWALK_EMBEDDINGAPI_TC}
@@ -36,10 +36,10 @@ init_coverity() {
 		fi
 	done
 
-	for usecase_embeddingapi in ${XWALK_USECASE_TC}
+	for usecase_embeddingapi in ${XWALK_USECASE_EMBEDDING_TC}
 	do
-		if [ ! -d ${COVERITY_DIR}/${embeddingapi_tc} ]; then
-			mkdir -pv ${COVERITY_DIR}/${embeddingapi_tc}
+		if [ ! -d ${COVERITY_DIR}/${usecase_embeddingapi} ]; then
+			mkdir -pv ${COVERITY_DIR}/${usecase_embeddingapi}
 		fi
 	done
 
@@ -75,6 +75,7 @@ copy_xwalk_webview() {
 
 	cd ${ROOT_DIR}/tools
 
+	rm -fr crosswalk-webview
 	if [ -d ${PKG_TOOLS_DIR}/crosswalk-webview-${XWALK_VERSION}-${arch} ]; then
 		cp -a ${PKG_TOOLS_DIR}/crosswalk-webview-${XWALK_VERSION}-${arch} ./crosswalk-webview
 	else
@@ -88,16 +89,20 @@ copy_xwalk_webview() {
 cov_build_embeddingapi_tc() {
 	ROOT_DIR=$1
 
+	ERRORS_DIR="output/errors"
 	cd ${ROOT_DIR}
 	for embeddingapi_tc in ${XWALK_EMBEDDINGAPI_TC}
 	do
 		cd ${embeddingapi_tc}
+		rm -fv *.zip
+		git clean -dfx .
+
 		cov-build --dir ./ ../../tools/build/pack.py -t embeddingapi --pack-type ant
 		cov-analyze-java --dir ./ --concurrency --security --rule --enable-constraint-fpp --enable-fnptr --enable-virtual
 		cov-format-errors --dir ./
 
-		if [ -d output/error ]; then
-			cp -fr output/error ${COVERITY_DIR}/${embeddingapi_tc}/
+		if [ -d ${ERRORS_DIR} ]; then
+			cp -fr ${ERRORS_DIR} ${COVERITY_DIR}/${embeddingapi_tc}/
 		else
 			echo "No error directory found!"
 		fi
@@ -105,15 +110,18 @@ cov_build_embeddingapi_tc() {
 		cd -
 	done
 
-	for usecase_embeddingapi in ${XWALK_USECASE_TC}
+	for usecase_embeddingapi in ${XWALK_USECASE_EMBEDDING_TC}
 	do
 		cd ${usecase_embeddingapi}
+		rm -fv *.zip
+		git clean -dfx .
+
 		cov-build --dir ./ ../../tools/build/pack.py -t embeddingapi --pack-type ant
 		cov-analyze-java --dir ./ --concurrency --security --rule --enable-constraint-fpp --enable-fnptr --enable-virtual
 		cov-format-errors --dir ./
 
-		if [ -d output/error ]; then
-			cp -fr output/error ${COVERITY_DIR}/${usecase_embeddingapi}/
+		if [ -d ${ERRORS_DIR} ]; then
+			cp -fr ${ERRORS_DIR} ${COVERITY_DIR}/${usecase_embeddingapi}/
 		else
 			echo "No error directory found!"
 		fi
@@ -129,4 +137,4 @@ init_coverity
 update_code ${CTS_DIR}
 update_version ${CTS_DIR} ${XWALK_VERSION}
 copy_xwalk_webview ${CTS_DIR} ${XWALK_VERSION} x86
-
+cov_build_embeddingapi_tc ${CTS_DIR}
