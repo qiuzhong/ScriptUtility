@@ -87,6 +87,7 @@ $ crosswalk-app build
 ## Notes
 
 ### The file tree is like this
+See the following operation:
 
     ```Bash
     $ cd Echo/
