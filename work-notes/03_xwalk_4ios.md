@@ -54,17 +54,17 @@ $ crosswalk-app build
 
 4. Create the index.html file as your entry page with the contents as follows:
 
-```HTML
- <html>
-   <head>
-     <meta name='viewport' content='width=device-width' />
-     <title>Echo demo of Crosswalk</title>
-   </head>
-   <body>
-     <h2>Echo Demo of Crosswalk</h2>
-   </body>
- </html>
-```
+    ```HTML
+     <html>
+       <head>
+         <meta name='viewport' content='width=device-width' />
+         <title>Echo demo of Crosswalk</title>
+       </head>
+       <body>
+         <h2>Echo Demo of Crosswalk</h2>
+       </body>
+     </html>
+    ```
 
 5. Add the www directory into the project.(in root directory)
 
@@ -85,6 +85,7 @@ $ crosswalk-app build
     The Echo demo is ready to run now. Press 'Run' button and it will be deployed and run on your iOS simulator.
 
 ## Notes
+
 ### The file tree is like this
 
     ```Bash
