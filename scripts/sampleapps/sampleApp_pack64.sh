@@ -279,8 +279,9 @@ start_release_work() {
     if [ ${RELEASE_FLAG} -eq 1 ]; then
         build_apk embedded x86_64
         build_apk embedded arm64-v8a
+        build_apk shared x86_64
         build_apk shared arm64-v8a
-        build_apk shared arm64-v8a
+        
 
         rm -rf Sampleapp_sourcecode.zip
 

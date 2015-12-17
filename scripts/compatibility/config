@@ -92,7 +92,10 @@ CORDOVA_EH_URL="https://github.com/MobileChromeApps/workshop-cca-eh.git"
 CORDOVA_MOBILESPEC_URL="https://github.com/crosswalk-project/crosswalk-test-suite.git"
 
 CORDOVA_SAMPLE_APPS_TC="
+cordova/cordova-appsecurityapi-android-tests
+cordova/cordova-feature-android-tests
 cordova/cordova-sampleapp-android-tests
+cordova/cordova-webapp-android-tests
 "
 
 CORDOVA_SAMPLE_APPS="

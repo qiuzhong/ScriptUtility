@@ -15,7 +15,7 @@ check_sdk() {
         echo "${PKG_TOOLS_DIR}/crosswalk-${VERSION} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-${VERSION} does not exist! -- NOOOOOK!"
-        echo "crosswalk-${VERSION}" >> ${VERSION}_does_not_exist.txt
+        # echo "crosswalk-${VERSION}" >> ${VERSION}_does_not_exist.txt
     fi
 }
 
@@ -26,7 +26,7 @@ check_sdk64() {
         echo "${PKG_TOOLS_DIR64}/crosswalk-${VERSION}-64bit exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR64}/crosswalk-${VERSION}-64bit does not exist! -- NOOOOOK!"
-        echo "crosswalk-${VERSION}" >> ${VERSION}_64_does_not_exist.txt
+        # echo "crosswalk-${VERSION}" >> ${VERSION}_64_does_not_exist.txt
     fi
 }
 
@@ -38,7 +38,7 @@ check_sdk_webview() {
         echo "${PKG_TOOLS_DIR}/crosswalk-webview-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-webview-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
+        # echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
     fi
 }
 
@@ -50,7 +50,7 @@ check_sdk_webview64() {
         echo "${PKG_TOOLS_DIR64}/crosswalk-webview-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR64}/crosswalk-webview-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
+        # echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
     fi
 }
 
@@ -62,28 +62,28 @@ check_sdk_all() {
         echo "${PKG_TOOLS_DIR}/crosswalk-apks-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-apks-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-apks-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
+        # echo "crosswalk-apks-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
     fi
 
     if [[ -d ${PKG_TOOLS_DIR}/crosswalk-cordova3-${VERSION}-${arch} ]]; then
         echo "${PKG_TOOLS_DIR}/crosswalk-cordova3-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-cordova3-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-cordova3-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
+        # echo "crosswalk-cordova3-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
     fi
 
     if [[ -d ${PKG_TOOLS_DIR}/crosswalk-test-apks-${VERSION}-${arch} ]]; then
         echo "${PKG_TOOLS_DIR}/crosswalk-test-apks-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-test-apks-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-test-apks-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
+        # echo "crosswalk-test-apks-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
     fi  
 
     if [[ -d ${PKG_TOOLS_DIR}/crosswalk-webview-${VERSION}-${arch} ]]; then
         echo "${PKG_TOOLS_DIR}/crosswalk-webview-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-webview-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
+        # echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_does_not_exist.txt
     fi       
 }
 
@@ -95,29 +95,49 @@ check_sdk_all64() {
         echo "${PKG_TOOLS_DIR64}/crosswalk-apks-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR64}/crosswalk-apks-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-test-apks-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
+        # echo "crosswalk-test-apks-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
     fi
 
     if [[ -d ${PKG_TOOLS_DIR64}/crosswalk-cordova3-${VERSION}-${arch} ]]; then
         echo "${PKG_TOOLS_DIR64}/crosswalk-cordova3-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR64}/crosswalk-cordova3-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-cordova3-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
+        # echo "crosswalk-cordova3-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
     fi
 
     if [[ -d ${PKG_TOOLS_DIR64}/crosswalk-test-apks-${VERSION}-${arch} ]]; then
         echo "${PKG_TOOLS_DIR64}/crosswalk-test-apks-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR64}/crosswalk-test-apks-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-test-apks-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
+        # echo "crosswalk-test-apks-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
     fi  
 
     if [[ -d ${PKG_TOOLS_DIR64}/crosswalk-webview-${VERSION}-${arch} ]]; then
         echo "${PKG_TOOLS_DIR64}/crosswalk-webview-${VERSION}-${arch} exists! -- OK"
     else
         echo "${PKG_TOOLS_DIR64}/crosswalk-webview-${VERSION}-${arch} does not exist! -- NOOOOOK!"
-        echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
+        # echo "crosswalk-webview-${VERSION}-${arch}" >> ${VERSION}_64_does_not_exist.txt
     fi       
+}
+
+check_sdk_for_apptools() {
+    VERSION=$1
+
+    if [ -f ${CROSSWALK_APP_TOOLS_CACHE_DIR}/crosswalk-${VERSION}.zip ]; then
+        echo "${CROSSWALK_APP_TOOLS_CACHE_DIR}/crosswalk-${VERSION}.zip exists! -- OK"
+    else
+        echo "${CROSSWALK_APP_TOOLS_CACHE_DIR}/crosswalk-${VERSION}.zip does not exists -- NOOOOOK!"
+    fi
+}
+
+check_sdk64_for_apptools() {
+    VERSION=$1
+
+    if [ -f ${CROSSWALK_APP_TOOLS_CACHE_DIR}/crosswalk-${VERSION}-64bit.zip ]; then
+        echo "${CROSSWALK_APP_TOOLS_CACHE_DIR}/crosswalk-${VERSION}-64bit.zip exists! -- OK"
+    else
+        echo "${CROSSWALK_APP_TOOLS_CACHE_DIR}/crosswalk-${VERSION}-64bit.zip does not exists -- NOOOOOK!"
+    fi
 }
 
 zero_text_file() {
@@ -155,8 +175,8 @@ zero_text_file() {
 # check_sdk_all ${N_3_VER} arm
 # check_sdk_all ${N_3_VER} x86
 
-XWALK_VERSION="18.46.452.0"
-zero_text_file ${XWALK_VERSION}
+XWALK_VERSION="18.46.455.0"
+# zero_text_file ${XWALK_VERSION}
 
 check_sdk ${XWALK_VERSION}
 check_sdk_all ${XWALK_VERSION} arm
@@ -165,3 +185,6 @@ check_sdk_all ${XWALK_VERSION} x86
 check_sdk64 ${XWALK_VERSION}
 check_sdk_all64 ${XWALK_VERSION} arm64
 check_sdk_all64 ${XWALK_VERSION} x86_64
+
+check_sdk_for_apptools ${XWALK_VERSION}
+check_sdk64_for_apptools ${XWALK_VERSION}
