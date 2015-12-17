@@ -89,8 +89,8 @@ $ crosswalk-app build
 ### The file tree is like this
 
     ```Bash
-    cd Echo/
-    macbook-x:Echo app$ ls
+    $ cd Echo/
+    $ ls
     Echo             Echo.xcworkspace EchoUITests      Podfile.lock     manifest.plist
     Echo.xcodeproj   EchoTests        Podfile          Pods             www
     ```
