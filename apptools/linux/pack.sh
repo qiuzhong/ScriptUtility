@@ -17,8 +17,8 @@ VERSION_FILE=${PWD_PARENT}/VERSION
 source ${VERSION_FILE}
 source ${PWD}/config
 
-DEST_DIR=${PWD}/${CROSSWALK_VERSION}
-PATCH_PACK_DEB_PY=${PATCH_DIR}/pack_deb.py
+DEST_DIR=${PWD}/${CROSSWALK_VERSION}-apptools
+PATCH_PACK_DEB_PY=${PATCH_DIR}/build_deb.py
 
 update_cts() {
     cd $1
@@ -39,15 +39,15 @@ init_env() {
         mkdir ${DEST_DIR}
     fi
 
-    if [ ! -z ${UPDATE_CODE} ]; then
+    if [ ${UPDATE_CODE} == "Yes" ]; then
         update_cts ${CTS_DIR}
     fi
 
-    if [ ! -z ${USE_PATCH} ]; then
+    if [ ${USE_PATCH} == "Yes" ]; then
         cp -fv ${PATCH_PACK_DEB_PY} ${CTS_DIR}/tools/build/
     fi
 
-    if [ ! -z ${UPDATE_XWALK_VERSION} ]; then
+    if [  ${UPDATE_XWALK_VERSION} == "Yes" ]; then
         update_xwalk_version ${CTS_DIR}
     fi
 }
@@ -58,11 +58,15 @@ pack_apptools_tc() {
     do
         cd ${CTS_DIR}/${tc}
         rm -fv *.zip
-        ../../tools/build/pack_deb.py -t deb
+        ../../tools/build/pack.py -t deb
         mv -fv *.zip ${DEST_DIR}
     done
 }
 
+echo "################################################################################"
+echo $(which crosswalk-app)
+echo $(which crosswalk-pkg)
+echo "################################################################################"
 
 init_env
 pack_apptools_tc

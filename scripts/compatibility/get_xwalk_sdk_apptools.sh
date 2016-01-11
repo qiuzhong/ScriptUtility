@@ -32,5 +32,6 @@ copy_sdk_4apptools64() {
 
 # copy_sdk_4apptools 17.46.448.1 beta
 # copy_sdk_4apptools64 17.46.448.1 beta
-copy_sdk_4apptools 17.46.448.0 canary
-copy_sdk_4apptools64 17.46.448.0 canary
+# copy_sdk_4apptools 17.46.448.0 canary
+# copy_sdk_4apptools64 17.46.448.0 canary
+copy_sdk_4apptools 16.45.421.19 beta

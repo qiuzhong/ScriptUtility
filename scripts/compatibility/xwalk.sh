@@ -25,6 +25,8 @@ update_code() {
         cd ${WORKSPACE}/crosswalk-test-suite-${N2}
     elif [[ $1 == "N3" ]]; then
         cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    elif [[ $1 == "N4" ]]; then
+        cd ${WORKSPACE}/crosswalk-test-suite-${N4}
     else
         echo "Params Error!"
         exit 1
@@ -90,6 +92,8 @@ copy_sdk_webview() {
         cd ${WORKSPACE}/crosswalk-test-suite-${N2}/tools
     elif [[ $1 == "N3" ]]; then
         cd ${WORKSPACE}/crosswalk-test-suite-${N3}/tools
+    elif [[ $1 == "N4" ]]; then
+        cd ${WORKSPACE}/crosswalk-test-suite-${N4}/tools
     else
         echo "Param Error!"
         exit 1
@@ -279,6 +283,8 @@ pack_embeddingapi_tc() {
         cd ${WORKSPACE}/crosswalk-test-suite-${N2}
     elif [[ $1 == "N3" ]]; then
         cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    elif [[ $1 == "N4" ]]; then
+        cd ${WORKSPACE}/crosswalk-test-suite-${N4}
     else
         echo "Params Error!"
         exit 1
@@ -320,6 +326,8 @@ pack_embeddingapi_tc() {
 # update_code N3
 # copy_demo_express N3
 # copy_webrunner N3
+
+# update_code N4
 
 ###############################################################################
 # Sample Apps Test Suites
@@ -445,7 +453,7 @@ pack_embeddingapi_tc() {
 # Embedding API Test Suites
 ###############################################################################
 
-# 17.17
+# 18.18
 
 # update_version N ${N_VER}
 # # copy_sdk_webview N ${N_VER} arm
@@ -454,7 +462,7 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N x86 shared ${N}
 
 
-# 16.17
+# 17.18
 
 # update_version N1 ${N_VER}
 # # copy_sdk_webview N1 ${N_VER} arm
@@ -463,7 +471,7 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N1 x86 shared ${N}
 
 
-# 15.17
+# 16.18
 
 # update_version N2 ${N_VER} 
 # # copy_sdk_webview N2 ${N_VER} arm
@@ -472,7 +480,7 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N2 x86 shared ${N}
 
 
-# 14.17
+# 15.18
 
 # update_version N3 ${N_VER}
 # # copy_sdk_webview N3 ${N_VER} arm
@@ -481,7 +489,7 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N3 x86 shared ${N}
 
 
-# # 16.16
+# 17.17
 
 # update_version N1 ${N_1_VER}
 # # copy_sdk_webview N1 ${N_1_VER} arm
@@ -490,15 +498,14 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N1 x86 shared ${N1}
 
 
-# # 15.15
+# # 16.16
 # update_version N2 ${N_2_VER}
 # # copy_sdk_webview N2 ${N_2_VER} arm
 # # pack_embeddingapi_tc N2 arm shared ${N2}
 # copy_sdk_webview N2 ${N_2_VER} x86
 # pack_embeddingapi_tc N2 x86 shared ${N2}
 
-
-# # 14.14
+# # 15.15
 
 # update_version N3 ${N_3_VER}
 # # copy_sdk_webview N3 ${N_3_VER} arm
@@ -507,16 +514,22 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N3 x86 shared ${N3}
 
 
+# 16.16
+update_version N2 ${N_2_VER}
+# copy_sdk_webview N2 ${N_2_VER} arm
+# pack_embeddingapi_tc N2 arm shared ${N2}
+copy_sdk_webview N2 ${N_2_VER} x86
+pack_embeddingapi_tc N2 x86 shared ${N2}
+
+
 # 15.16
-# update_version N2 ${N_1_VER}
-# copy_sdk_webview N2 ${N_1_VER} arm
-# pack_embeddingapi_tc N2 arm shared ${N1}
-# copy_sdk_webview N2 ${N_1_VER} x86
-# pack_embeddingapi_tc N2 x86 shared ${N1}
+# update_version N3 ${N_2_VER}
+# copy_sdk_webview N3 ${N_2_VER} arm
+# pack_embeddingapi_tc N3 arm shared ${N2}
+# copy_sdk_webview N3 ${N_2_VER} x86
+# pack_embeddingapi_tc N3 x86 shared ${N2}
 
 # 14.16
-# update_version N3 ${N_1_VER}
-# copy_sdk_webview N3 ${N_1_VER} arm
-# pack_embeddingapi_tc N3 arm shared ${N1}
-# copy_sdk_webview N3 ${N_1_VER} x86
-# pack_embeddingapi_tc N3 x86 shared ${N1}
+# update_code N4 ${N_2_VER}
+# copy_sdk_webview N4 ${N_2_VER} x86
+# pack_embeddingapi_tc N4 x86 shared ${N2}

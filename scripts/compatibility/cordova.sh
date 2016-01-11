@@ -198,7 +198,7 @@ modify_gradle_4cca() {
     fi
 }
 
-update_cordova_tc() {
+pack_cordova_tc() {
     DIR_NAME=$1
     BRANCH=$2
     arch=$3
@@ -227,6 +227,13 @@ update_cordova_tc() {
     done
 }
 
+pack_cordova_sampleapps() {
+    DIR_NAME=$1
+    BRANCH=$2
+    arch=$3
+    mode=$4
+    tag = 
+}
 
 ###############################################################################
 #   Building Cordova-related apks and test suites.

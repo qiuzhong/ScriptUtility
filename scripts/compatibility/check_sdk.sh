@@ -175,9 +175,17 @@ zero_text_file() {
 # check_sdk_all ${N_3_VER} arm
 # check_sdk_all ${N_3_VER} x86
 
-XWALK_VERSION="18.46.455.0"
+# Latest Crosswalk Version
+# XWALK_VERSION="18.46.457.0"
+# XWALK_VERSION="16.45.421.19"
+# XWALK_VERSION="17.46.448.3"
+
+# For temporary test
+# XWALK_VERSION="18.46.457.0"
+
 # zero_text_file ${XWALK_VERSION}
 
+XWALK_VERSION=$1
 check_sdk ${XWALK_VERSION}
 check_sdk_all ${XWALK_VERSION} arm
 check_sdk_all ${XWALK_VERSION} x86

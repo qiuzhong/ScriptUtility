@@ -15,7 +15,7 @@ VERSION_FILE=${PWD_PARENT}/VERSION
 source ${VERSION_FILE}
 source ${PWD}/config
 
-DEST_DIR=${PWD}/${CROSSWALK_VERSION}
+DEST_DIR=${PWD}/${CROSSWALK_VERSION}-apptools
 
 update_cts() {
     cd $1
@@ -76,7 +76,9 @@ pack_apptools_tc32() {
             do
                 echo "../../tools/build/pack.py -t apk -m ${mode} -a ${arch}"
                 ../../tools/build/pack.py -t apk -m ${mode} -a ${arch}
-                mv -fv *.zip ${DEST_DIR}/${mode}/${arch}
+                if [ -f *.zip ]; then
+                    mv -fv *.zip ${DEST_DIR}/${mode}/${arch}
+                fi
             done
         done        
     done
@@ -93,17 +95,23 @@ pack_apptools_tc64() {
         do
             for arch in ${ARCH64}
             do
+                echo "../../tools/build/pack.py -t apk -m ${mode} -a ${arch}"
                 ../../tools/build/pack.py -t apk -m ${mode} -a ${arch}
-                mv -fv *.zip ${DEST_DIR}/${mode}/${arch}
+                if [ -f *.zip ]; then
+                    mv -fv *.zip ${DEST_DIR}/${mode}/${arch}
+                fi
             done
         done        
     done
 }
 
-
+echo "################################################################################"
+echo $(which crosswalk-app)
+echo $(which crosswalk-pkg)
+echo "################################################################################"
 rm -fr ${DEST_DIR}
 create_dest_dir
-init_env 32
+# init_env 32
 pack_apptools_tc32
-init_env 64
+# init_env 64
 pack_apptools_tc64

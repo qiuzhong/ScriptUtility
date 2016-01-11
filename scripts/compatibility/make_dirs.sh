@@ -1,6 +1,6 @@
 #!/bin/bash
 
-N=17
+N=16
 cd /home/orange/01_qiuzhong/temp/compatibility
 
 if [[ ! -d ${N} ]]; then
@@ -18,7 +18,7 @@ else
 fi
 
 if [[ ! -d test_suites ]]; then
-    mkdir -pv test_suites/{cordova,crosswalk}/{crosswalk-14,crosswalk-15,crosswalk-16,crosswalk-17,crosswalk-18}/{arm,x86}
+    mkdir -pv test_suites/{cordova,crosswalk}/{crosswalk-14,crosswalk-15,crosswalk-16}/{arm,x86}
 else
     echo "test_suites already exists!"
 fi

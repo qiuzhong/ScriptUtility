@@ -139,6 +139,10 @@ copy_hexgl_to_samples() {
     cp -a ${ROOT_DIR}/HexGL ${ROOT_DIR}/crosswalk-samples/
 }
 
+copy_private_notes_to_samples() {
+    cp -a ${ROOT_DIR}/sample-my-private-notes ${ROOT_DIR}/crosswalk-samples/
+}
+
 modify_webrtc_config() {
     # subsitute the server IP and port in webrtc/client/main.js
     sed -i "s|var SERVER_IP = '192.168.0.25'|var SERVER_IP = '106.187.98.180'|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
@@ -296,6 +300,7 @@ update_code ${ROOT_DIR}/crosswalk-samples-original
 copy_crosswalk_samples_original
 copy_demos_to_samples
 copy_hexgl_to_samples
+copy_private_notes_to_samples
 
 modify_webrtc_config
 modify_spacedodge_config

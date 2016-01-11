@@ -1,3 +1,5 @@
+export PATH=/home/orange/crosswalk-app-tools-linux/src:$PATH
+
 CTS_DIR=/home/orange/01_qiuzhong/00-crosswalk-project/crosswalk-test-suite-apptools
 PATCH_DIR="/home/orange/01_qiuzhong/04-work/patch/apptools/linux"
 
@@ -7,6 +9,6 @@ apptools/apptools-sampleapp-tests
 usecase/usecase-apptools-tests
 "
 
-USE_PATCH="No"
+USE_PATCH="Yes"
 UPDATE_CODE="Yes"
 UPDATE_XWALK_VERSION="Yes"
