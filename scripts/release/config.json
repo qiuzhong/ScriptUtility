@@ -1,0 +1,11 @@
+{
+    "IMAGES_DIR": "/home/orange/00_jiajia/images/linux-ftp.sh.intel.com/pub/mirrors/01org/crosswalk/releases/crosswalk/android",
+    "branch_options": ["beta", "canary", "stable"],
+
+    "xwalk": {
+        "version": "",        
+        "branch": "",
+        "arches": ["arm", "arm64", "x86", "x86_64"],
+        "components": ["apks", "test-apks", "webview"]
+    }    
+}

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 ################################################################################
 #
 #   This script aims to pack the Crosswalk sample apks.
@@ -13,7 +14,7 @@
 #       5. Modify the config file. Set OFFICIAL_RELEASE_FLAG="true" if use it
 #           in product environment.
 #       6. Makre sure crosswalk-appt-tools is available and 
-#           crosswalk-<Version>-64bit.zip is in ${CROSSWALK_APP_TOOLS_CACHE_DIR}
+#           crosswalk-<Version>.zip is in ${CROSSWALK_APP_TOOLS_CACHE_DIR}
 #   Usage:
 #       ./pack_xwalk_samples64.sh -v <Crosswalk Version> -r
 #
@@ -31,7 +32,7 @@ else
     DEST_BINARY_DIR=${TEST_DEST_BINARY_DIR}
 fi
 
-PATCH_DIR64=${ROOT_DIR}/patch/64bit
+PATCH_DIR=${ROOT_DIR}/patch/32bit
 
 PKG_TOOLS_DIR=${CROSSWALK_APP_TOOLS_CACHE_DIR}
 CROSSWALK_PKG=crosswalk-pkg
@@ -76,7 +77,7 @@ do
 done
 
     
-if [ -z ${SDK_VERSION} ];then
+if [ -z $SDK_VERSION ];then
     show_help
     exit 1
 fi
@@ -142,31 +143,27 @@ copy_private_notes_to_samples() {
     cp -a ${ROOT_DIR}/sample-my-private-notes ${ROOT_DIR}/crosswalk-samples/
 }
 
-
 modify_webrtc_config() {
     # subsitute the server IP and port in webrtc/client/main.js
-    sed -i "s|var SERVER_IP = '192.168.0.25'|var SERVER_IP = '192.168.1.100'|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
-    #sed -i "s|var SERVER_PORT = 9000|var SERVER_PORT = 9001|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
+    sed -i "s|var SERVER_IP = '192.168.0.25'|var SERVER_IP = '106.187.98.180'|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
+    sed -i "s|var SERVER_PORT = 9000|var SERVER_PORT = 9001|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
 
 }
 
 modify_extensions_android_config() {
     if [ -n ${SDK_VERSION} ]; then
-        if [ -f ${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}-64bit.zip ]; then
-            CROSSWALK_ZIP=${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}-64bit.zip
-            sed -i "s|15.44.384.13|${SDK_VERSION}|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
+        if [ -f ${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}.zip ]; then
+            CROSSWALK_ZIP=${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}.zip
+            sed -i "s|8.37.189.14|${SDK_VERSION}|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
 
             if [ ! -d ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib ]; then
                 mkdir -pv ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib
             fi
 
             cp -fv ${ROOT_DIR}/patch/ivy-2.4.0.jar ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/tools/ivy-2.4.0.jar
-            cp -fv ${PATCH_DIR64}/build.sh ${ROOT_DIR}/crosswalk-samples/extensions-android/build.sh
-
-            # To adapt the build.xml, the file name must be crosswalk.zip
-            rename_xwalk_64_32 ${CROSSWALK_ZIP} ${SDK_VERSION} 
-            cp -fv ${ROOT_DIR}/patch/crosswalk.zip ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib/crosswalk.zip
-            unzip -q ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib/crosswalk.zip -d ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib/            
+            cp -fv ${PATCH_DIR}/build.sh ${ROOT_DIR}/crosswalk-samples/extensions-android/build.sh
+            cp -fv ${CROSSWALK_ZIP} ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib/crosswalk.zip
+            unzip -q ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib/crosswalk.zip -d ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib/
         else
             echo "${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}.zip does not exist, please download it first !"
             exit 1
@@ -189,26 +186,6 @@ modify_spacedodge_config() {
 
     sed -i "s/Space Dodge/Space Dodge5/g" ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-scale/manifest.json
     sed -i "s/org.xwalk.spacedodgegame/org.xwalk.spacedodgegame5/g" ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-scale/manifest.json
-}
-
-rename_xwalk_64_32() {
-    # This function tries to rename the crosswalk-${VERSION}-64bit.zip to crosswalk.zip while
-    # unzip it will get crosswalk-${VERSION} directory.
-
-    XWALK_ZIP=$1
-    XWALK_VERSION=$2
-
-    cd ${ROOT_DIR}/patch
-    rm -fv *.zip
-    rm -fr ${ROOT_DIR}/patch/crosswalk-${XWALK_VERSION}
-    rm -fr ${ROOT_DIR}/patch/crosswalk-${XWALK_VERSION}-64bit
-
-    cp -fv ${XWALK_ZIP} ${ROOT_DIR}/patch
-    unzip -q crosswalk-${XWALK_VERSION}-64bit.zip 
-    mv -fv crosswalk-${XWALK_VERSION}-64bit crosswalk-${XWALK_VERSION}
-    zip -qr crosswalk.zip crosswalk-${XWALK_VERSION}
-    
-    cd -
 }
 
 build_apk() {
@@ -247,14 +224,15 @@ build_apk() {
 
     # 7. space-dodge-game
     ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/space-dodge-game/base
-    
+
+    # Change package id of other version space-dodge-game, to void same apk name.
     # 7.1 
     ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/manifest-orientation-resize
 
     # 7.2
     ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/manifest-orientation-scale
 
-    # 7.3    
+    # 7.3
     ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-resize
 
     # 7.4
@@ -270,23 +248,21 @@ build_apk() {
 
     cd ${ROOT_DIR}
     rm -rf Sampleapp_binary.zip
-    if [ ${arch} == "arm64-v8a" ]; then
-        friendly_arch="arm64"
+    if [ ${arch} == "armeabi-v7a" ]; then
+        friendly_arch="arm"
     else
         friendly_arch=${arch}
     fi
-
     rm -rf Sampleapp_binary-${SDK_VERSION}-${mode}-${friendly_arch}.zip
     zip -qr Sampleapp_binary-${SDK_VERSION}-${mode}-${friendly_arch}.zip Sampleapp_binary
 }
 
 start_release_work() {
     if [ ${RELEASE_FLAG} -eq 1 ]; then
-        build_apk embedded x86_64
-#        build_apk embedded arm64-v8a
-        build_apk shared x86_64
-#        build_apk shared arm64-v8a
-        
+        build_apk embedded x86
+        build_apk embedded armeabi-v7a
+#        build_apk shared x86
+        build_apk shared armeabi-v7a
 
         rm -rf Sampleapp_sourcecode.zip
 
@@ -296,16 +272,17 @@ start_release_work() {
         rm -fr ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build
 
         # Modify the crosswalk version back to make sure the source code is original.
-        sed -i "s|${SDK_VERSION}|15.44.384.13|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
+        sed -i "s|${SDK_VERSION}|8.37.189.14|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
 
         rm -fr ${ROOT_DIR}/crosswalk-samples/.git
         zip -qr Sampleapp_sourcecode.zip crosswalk-samples
-        cp -fv Sampleapp_binary-${SDK_VERSION}-*64.zip ${DEST_BINARY_DIR}
+        cp -fv Sampleapp_binary-${SDK_VERSION}-*.zip ${DEST_BINARY_DIR}
         cp -fv Sampleapp_sourcecode.zip ${DEST_BINARY_DIR}
 
         echo "SampleApp sourcecode and binary for release has been updated !!!"
         echo "You can check it here : http://otcqa.sh.intel.com/qa-auto/live/Xwalk-testsuites/Sampleapp_SourceCode_And_Binary/"
     fi
+
 }
 
 ################################################################################
@@ -334,4 +311,3 @@ start_release_work
 
 clean_dir crosswalk-samples
 clean_dir Sampleapp_binary
-

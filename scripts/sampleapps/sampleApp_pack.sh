@@ -21,7 +21,7 @@
 ################################################################################ 
 
 CWD=$(pwd)
-source /etc/profile
+#source /etc/profile
 source ${CWD}/config
 
 if [ ${OFFICIAL_RELEASE_FLAG} == "true" ]; then
@@ -35,7 +35,7 @@ fi
 PATCH_DIR=${ROOT_DIR}/patch/32bit
 
 PKG_TOOLS_DIR=${CROSSWALK_APP_TOOLS_CACHE_DIR}
-CROSSWALK_PKG=$PKG_TOOLS_DIR/crosswalk-app-tools/src/crosswalk-pkg
+CROSSWALK_PKG=crosswalk-pkg
 
 
 SDK_VERSION=""
@@ -145,8 +145,8 @@ copy_private_notes_to_samples() {
 
 modify_webrtc_config() {
     # subsitute the server IP and port in webrtc/client/main.js
-    sed -i "s|var SERVER_IP = '192.168.0.25'|var SERVER_IP = '106.187.98.180'|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
-    sed -i "s|var SERVER_PORT = 9000|var SERVER_PORT = 9001|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
+    sed -i "s|var SERVER_IP = '192.168.0.25'|var SERVER_IP = '192.168.1.100'|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
+    #sed -i "s|var SERVER_PORT = 9000|var SERVER_PORT = 9001|" ${ROOT_DIR}/crosswalk-samples/webrtc/client/main.js
 
 }
 
@@ -154,7 +154,7 @@ modify_extensions_android_config() {
     if [ -n ${SDK_VERSION} ]; then
         if [ -f ${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}.zip ]; then
             CROSSWALK_ZIP=${PKG_TOOLS_DIR}/crosswalk-${SDK_VERSION}.zip
-            sed -i "s|8.37.189.14|${SDK_VERSION}|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
+            sed -i "s|15.44.384.13|${SDK_VERSION}|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
 
             if [ ! -d ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib ]; then
                 mkdir -pv ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/lib
@@ -260,9 +260,9 @@ build_apk() {
 start_release_work() {
     if [ ${RELEASE_FLAG} -eq 1 ]; then
         build_apk embedded x86
-        build_apk embedded armeabi-v7a
+#        build_apk embedded armeabi-v7a
         build_apk shared x86
-        build_apk shared armeabi-v7a
+#        build_apk shared armeabi-v7a
 
         rm -rf Sampleapp_sourcecode.zip
 
@@ -272,7 +272,7 @@ start_release_work() {
         rm -fr ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build
 
         # Modify the crosswalk version back to make sure the source code is original.
-        sed -i "s|${SDK_VERSION}|8.37.189.14|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
+        sed -i "s|${SDK_VERSION}|15.44.384.13|" ${ROOT_DIR}/crosswalk-samples/extensions-android/xwalk-echo-extension-src/build.xml
 
         rm -fr ${ROOT_DIR}/crosswalk-samples/.git
         zip -qr Sampleapp_sourcecode.zip crosswalk-samples

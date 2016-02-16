@@ -31,7 +31,7 @@ else
     DEST_BINARY_DIR=${TEST_DEST_BINARY_DIR}
 fi
 
-PATCH_DIR64=${ROOT_DIR}/patch/64bit
+PATCH_DIR64=${ROOT_DIR}/patch/64bit_shared
 
 PKG_TOOLS_DIR=${CROSSWALK_APP_TOOLS_CACHE_DIR}
 CROSSWALK_PKG=crosswalk-pkg
@@ -231,40 +231,40 @@ build_apk() {
     cd ${BINARY_DIR}
 
     # 2. HangOnMan    
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/HangOnMan/src
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/HangOnMan/src
 
     # 3. hello-world
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/hello-world
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/hello-world
 
     # 4. HexGL
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/HexGL/assets/www
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/HexGL/assets/www
 
     # 5. MemoryGame
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/MemoryGame/src
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/MemoryGame/src
 
     # 6. simd-mandelbrot
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/simd-mandelbrot
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/simd-mandelbrot
 
     # 7. space-dodge-game
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/space-dodge-game/base
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/space-dodge-game/base
     
     # 7.1 
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/manifest-orientation-resize
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/manifest-orientation-resize
 
     # 7.2
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/manifest-orientation-scale
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/manifest-orientation-scale
 
     # 7.3    
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-resize
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-resize
 
     # 7.4
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-scale
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging  ${ROOT_DIR}/crosswalk-samples/space-dodge-game/screen-orientation-scale
 
     # 8. webgl
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/webgl
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/webgl
 
     # 9. webrtc
-    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --targets=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/webrtc/client
+    ${CROSSWALK_PKG} --crosswalk=${CROSSWALK_ZIP} --platforms=android --android=${mode} --target=${arch} --enable-remote-debugging ${ROOT_DIR}/crosswalk-samples/webrtc/client
 
     set +e
 
@@ -282,7 +282,7 @@ build_apk() {
 
 start_release_work() {
     if [ ${RELEASE_FLAG} -eq 1 ]; then
-        build_apk embedded x86_64
+#       build_apk embedded x86_64
 #        build_apk embedded arm64-v8a
         build_apk shared x86_64
 #        build_apk shared arm64-v8a
@@ -301,7 +301,7 @@ start_release_work() {
         rm -fr ${ROOT_DIR}/crosswalk-samples/.git
         zip -qr Sampleapp_sourcecode.zip crosswalk-samples
         cp -fv Sampleapp_binary-${SDK_VERSION}-*64.zip ${DEST_BINARY_DIR}
-        cp -fv Sampleapp_sourcecode.zip ${DEST_BINARY_DIR}
+#        cp -fv Sampleapp_sourcecode.zip ${DEST_BINARY_DIR}
 
         echo "SampleApp sourcecode and binary for release has been updated !!!"
         echo "You can check it here : http://otcqa.sh.intel.com/qa-auto/live/Xwalk-testsuites/Sampleapp_SourceCode_And_Binary/"

@@ -17,21 +17,23 @@ source ${CWD}/config
 ###############################################################################
 update_code() {
 
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
-    elif [[ $1 == "N4" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N4}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}
     else
         echo "Params Error!"
         exit 1
     fi
 
+    cd ${CTS_DIR}
     git reset --hard HEAD
     git pull
     
@@ -39,42 +41,55 @@ update_code() {
 }
 
 update_version() {
-
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    DIR_NAME=$1
+    xwalk_version=$2
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3} 
+    else
+        echo "Params Error!"
+        exit 1
     fi 
 
-    sed -i "s|\"main-version\": \"\([^\"]*\)\"|\"main-version\": \"$2\"|g" VERSION
-    if [[ $2 == ${N_PLUS_1_VER} ]]; then
+    cd ${CTS_DIR}
+    sed -i "s|\"main-version\": \"\([^\"]*\)\"|\"main-version\": \"${xwalk_version}\"|g" VERSION
+
+    if [[ ${xwalk_version} == ${N_PLUS1_VER} ]]; then
         sed -i "s/beta/canary/" VERSION
     fi
+
     cd -
 }
 
 copy_sdk() {
-
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite/tools
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}/tools
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}/tools
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}/tools
+    DIR_NAME=$1    
+    xwalk_version=$2
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite/tools
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}/tools
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}/tools
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}/tools
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}/tools
     else
         echo "Params Error!"
         exit 1
     fi        
 
+    cd ${TOOLS_DIR}
     rm -fr crosswalk
-    if [[ -d ${PKG_TOOLS_DIR}/crosswalk-$2 ]]; then
-        cp -a ${PKG_TOOLS_DIR}/crosswalk-$2 ./crosswalk
+    if [[ -d ${PKG_TOOLS_DIR}/crosswalk-${xwalk_version} ]]; then
+        cp -a ${PKG_TOOLS_DIR}/crosswalk-${xwalk_version} ./crosswalk
     else
         echo "${PKG_TOOLS_DIR}/crosswalk-$2 does not exists!"
         exit 1        
@@ -83,27 +98,30 @@ copy_sdk() {
 }
 
 copy_sdk_webview() {
-
-    if [[ $1 == "N" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite/tools
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}/tools
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}/tools
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}/tools
-    elif [[ $1 == "N4" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N4}/tools
+    DIR_NAME=$1
+    xwalk_version=$2
+    arch=$3
+    if [[ ${DIR_NAME} == "NPLUS1" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite/tools
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}/tools
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}/tools
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}/tools
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        TOOLS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}/tools
     else
         echo "Param Error!"
         exit 1
     fi
 
+    cd ${TOOLS_DIR}
     rm -fr crosswalk-webview
-    if [[ -d ${PKG_TOOLS_DIR}/crosswalk-webview-$2-$3 ]]; then
-        cp -a ${PKG_TOOLS_DIR}/crosswalk-webview-$2-$3 ./crosswalk-webview 
+    if [[ -d ${PKG_TOOLS_DIR}/crosswalk-webview-${xwalk_version}-${arch} ]]; then
+        cp -a ${PKG_TOOLS_DIR}/crosswalk-webview-${xwalk_version}-${arch} ./crosswalk-webview 
     else
-        echo "${PKG_TOOLS_DIR}/crosswalk-webview-$2-$3 does not exists!"
+        echo "${PKG_TOOLS_DIR}/crosswalk-webview-${xwalk_version}-${arch} does not exists!"
         exit 1
     fi
     
@@ -114,16 +132,23 @@ copy_sdk_webview() {
 }
 
 copy_demo_express() {
-
-    if [[ $1 == "N" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}
+    else
+        echo "Params Error!"
+        exit 1
     fi
+
+    cd ${CTS_DIR}
 
     cd usecase/usecase-webapi-xwalk-tests
     cp -dpR $DEMOEX_DIR/samples/* ./samples/
@@ -145,23 +170,29 @@ copy_demo_express() {
 }
 
 copy_webrunner() {
-
-    if [[ $1 == "N" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}
+    else
+        echo "Params Error!"
+        exit 1
     fi    
 
+    cd ${CTS_DIR}
     for aio in ${XWALK_WEBAPI_TC}
     do
         cd $aio
         rm -fv *.zip
         mkdir -p webrunner
-        cp ../../tools/resources/webrunner/* webrunner -a
+        cp -a ../../tools/resources/webrunner/* webrunner 
         cd -
     done
 
@@ -169,20 +200,23 @@ copy_webrunner() {
 }
 
 pack_sampleapp_tc() {
-    
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3} 
     else
         echo "Params Error!"
         exit 1
     fi 
 
+    cd ${CTS_DIR}
     for tc in ${XWALK_SAMPLE_APPS_TC}
     do
         cd $tc
@@ -198,20 +232,23 @@ pack_sampleapp_tc() {
 }
 
 pack_usecase_tc() {
-
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3} 
     else
         echo "Params Error!"
         exit 1
     fi
 
+    cd ${CTS_DIR}
     for tc in ${XWALK_USECASE_TC}
     do
         cd $tc
@@ -241,20 +278,23 @@ pack_usecase_tc() {
 
 
 pack_webapi_tc() {
-    
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}        
     else
         echo "Params Error!"
         exit 1
     fi    
 
+    cd ${CTS_DIR}
     for tc in ${XWALK_WEBAPI_TC}
     do
         if [[ -d $tc ]]; then
@@ -275,21 +315,23 @@ pack_webapi_tc() {
 }
 
 pack_embeddingapi_tc() {
-    if [[ $1 == "N" ]];then
-        cd ${WORKSPACE}/crosswalk-test-suite
-    elif [[ $1 == "N1" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N1}
-    elif [[ $1 == "N2" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N2}
-    elif [[ $1 == "N3" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N3}
-    elif [[ $1 == "N4" ]]; then
-        cd ${WORKSPACE}/crosswalk-test-suite-${N4}
+    DIR_NAME=$1
+    if [[ ${DIR_NAME} == "NPLUS1" ]];then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite
+    elif [[ ${DIR_NAME} == "N" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N}
+    elif [[ ${DIR_NAME} == "N1" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N1}
+    elif [[ ${DIR_NAME} == "N2" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N2}
+    elif [[ ${DIR_NAME} == "N3" ]]; then
+        CTS_DIR=${WORKSPACE}/crosswalk-test-suite-${N3}
     else
         echo "Params Error!"
         exit 1
     fi    
 
+    cd ${CTS_DIR}
     for tc in ${XWALK_EMBEDDINGAPI_TC}
     do
         if [[ -d $tc ]]; then
@@ -327,30 +369,28 @@ pack_embeddingapi_tc() {
 # copy_demo_express N3
 # copy_webrunner N3
 
-# update_code N4
 
 ###############################################################################
 # Sample Apps Test Suites
 ###############################################################################
-
-# 17.16
-
+# 00.n-1-shared
+###############################################################################
 # update_version N ${N_1_VER}
 # copy_sdk N ${N_1_VER}
 # # pack_sampleapp_tc N arm shared ${N1}
 # pack_sampleapp_tc N x86 shared ${N1}
 
-
-# 17.15
-
+###############################################################################
+# 00.n-2-shared
+###############################################################################
 # update_version N ${N_2_VER}
 # copy_sdk N ${N_2_VER}
 # # pack_sampleapp_tc N arm shared ${N2}
 # pack_sampleapp_tc N x86 shared ${N2}
 
-
-# 17.14
-
+###############################################################################
+# 00.n-3-shared
+###############################################################################
 # update_version N ${N_3_VER}
 # copy_sdk N ${N_3_VER}
 # # pack_sampleapp_tc N arm shared ${N3}
@@ -360,8 +400,8 @@ pack_embeddingapi_tc() {
 ###############################################################################
 # Usecase Test Suites...
 ###############################################################################
-# 17.17
-
+# n.n-shared
+###############################################################################
 # update_version N ${N_VER}
 # copy_sdk N ${N_VER}
 # # copy_sdk_webview N ${N_VER} arm
@@ -369,9 +409,9 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N ${N_VER} x86
 # pack_usecase_tc N x86 shared ${N}
 
-
-# 16.17
-
+###############################################################################
+# n-1.n-shared
+###############################################################################
 # update_version N1 ${N_VER}
 # copy_sdk N1 ${N_VER}
 # # copy_sdk_webview N1 ${N_VER} arm
@@ -379,9 +419,9 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N1 ${N_VER} x86
 # pack_usecase_tc N1 x86 shared ${N}
 
-
-# 15.17
-
+###############################################################################
+# n-2.n-shared
+###############################################################################
 # update_version N2 ${N_VER}
 # copy_sdk N2 ${N_VER}
 # # copy_sdk_webview N2 ${N_VER} arm
@@ -389,9 +429,9 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N2 ${N_VER} x86
 # pack_usecase_tc N2 x86 shared ${N}
 
-
-# 14.17
-
+###############################################################################
+# n-3.n-shared
+###############################################################################
 # update_version N3 ${N_VER}
 # copy_sdk N3 ${N_VER}
 # # copy_sdk_webview N3 ${N_VER} arm
@@ -399,9 +439,9 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N3 ${N_VER} x86
 # pack_usecase_tc N3 x86 shared ${N}
 
-
-# 16.16
-
+###############################################################################
+# n-1.n-1-shared
+###############################################################################
 # update_version N1 ${N_1_VER}
 # copy_sdk N1 ${N_1_VER}
 # # copy_sdk_webview N1 ${N_1_VER} arm
@@ -409,9 +449,9 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N1 ${N_1_VER} x86
 # pack_usecase_tc N1 x86 shared ${N1}
 
-
-# 15.15
-
+###############################################################################
+# n-2.n-2-shared
+###############################################################################
 # update_version N2 ${N_2_VER}
 # copy_sdk N2 ${N_2_VER}
 # # copy_sdk_webview N2 ${N_2_VER} arm
@@ -419,9 +459,9 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N2 ${N_2_VER} x86
 # pack_usecase_tc N2 x86 shared ${N2}
 
-
-# 14.14
-
+###############################################################################
+# n-3.n-3-shared
+###############################################################################
 # update_version N3 ${N_3_VER}
 # copy_sdk N3 ${N_3_VER}
 # # copy_sdk_webview N3 ${N_3_VER} arm
@@ -433,27 +473,19 @@ pack_embeddingapi_tc() {
 ###############################################################################
 # WebAPI Test Suites
 ###############################################################################
-# 16.16
-
+# n-1.n-1-shared
+###############################################################################
 # update_version N1 ${N_1_VER}
 # copy_sdk N1 ${N_1_VER}
 # # pack_webapi_tc N1 arm shared ${N1}
 # pack_webapi_tc N1 x86 shared ${N1}
 
 
-# 15.15
-
-# update_version N2 ${N_2_VER}
-# copy_sdk N2 ${N_2_VER}
-# # pack_webapi_tc N2 arm shared ${N2}
-# pack_webapi_tc N2 x86 shared ${N2}
-
-
 ###############################################################################
 # Embedding API Test Suites
 ###############################################################################
-
-# 18.18
+# n.n-shared
+###############################################################################
 
 # update_version N ${N_VER}
 # # copy_sdk_webview N ${N_VER} arm
@@ -462,7 +494,9 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N x86 shared ${N}
 
 
-# 17.18
+###############################################################################
+# n-1.n-shared
+###############################################################################
 
 # update_version N1 ${N_VER}
 # # copy_sdk_webview N1 ${N_VER} arm
@@ -471,7 +505,9 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N1 x86 shared ${N}
 
 
-# 16.18
+###############################################################################
+# n-2.n-shared
+###############################################################################
 
 # update_version N2 ${N_VER} 
 # # copy_sdk_webview N2 ${N_VER} arm
@@ -480,7 +516,9 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N2 x86 shared ${N}
 
 
-# 15.18
+###############################################################################
+# n-3.n-shared
+###############################################################################
 
 # update_version N3 ${N_VER}
 # # copy_sdk_webview N3 ${N_VER} arm
@@ -489,7 +527,9 @@ pack_embeddingapi_tc() {
 # pack_embeddingapi_tc N3 x86 shared ${N}
 
 
-# 17.17
+###############################################################################
+# n-1.n-1-shared
+###############################################################################
 
 # update_version N1 ${N_1_VER}
 # # copy_sdk_webview N1 ${N_1_VER} arm
@@ -497,39 +537,21 @@ pack_embeddingapi_tc() {
 # copy_sdk_webview N1 ${N_1_VER} x86
 # pack_embeddingapi_tc N1 x86 shared ${N1}
 
-
-# # 16.16
+###############################################################################
+# n-2.n-2-shared
+###############################################################################
 # update_version N2 ${N_2_VER}
 # # copy_sdk_webview N2 ${N_2_VER} arm
 # # pack_embeddingapi_tc N2 arm shared ${N2}
 # copy_sdk_webview N2 ${N_2_VER} x86
 # pack_embeddingapi_tc N2 x86 shared ${N2}
 
-# # 15.15
+###############################################################################
+# n-3.n-3-shared
+###############################################################################
 
 # update_version N3 ${N_3_VER}
 # # copy_sdk_webview N3 ${N_3_VER} arm
 # # pack_embeddingapi_tc N3 arm shared ${N3}
 # copy_sdk_webview N3 ${N_3_VER} x86
 # pack_embeddingapi_tc N3 x86 shared ${N3}
-
-
-# 16.16
-update_version N2 ${N_2_VER}
-# copy_sdk_webview N2 ${N_2_VER} arm
-# pack_embeddingapi_tc N2 arm shared ${N2}
-copy_sdk_webview N2 ${N_2_VER} x86
-pack_embeddingapi_tc N2 x86 shared ${N2}
-
-
-# 15.16
-# update_version N3 ${N_2_VER}
-# copy_sdk_webview N3 ${N_2_VER} arm
-# pack_embeddingapi_tc N3 arm shared ${N2}
-# copy_sdk_webview N3 ${N_2_VER} x86
-# pack_embeddingapi_tc N3 x86 shared ${N2}
-
-# 14.16
-# update_code N4 ${N_2_VER}
-# copy_sdk_webview N4 ${N_2_VER} x86
-# pack_embeddingapi_tc N4 x86 shared ${N2}

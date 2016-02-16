@@ -43,7 +43,7 @@ init_coverity() {
 		fi
 	done
 
-
+    chmod u+x ${CTS_DIR}/tools/build/pack.py
 }
 
 update_code() {
@@ -87,13 +87,15 @@ copy_xwalk_webview() {
 }
 
 cov_build_embeddingapi_tc() {
-	ROOT_DIR=$1
+	chmod u+x ${CTS_DIR}/tools/build/pack.py
+    
+    ROOT_DIR=$1
 
 	ERRORS_DIR="output/errors"
 	cd ${ROOT_DIR}
 	for embeddingapi_tc in ${XWALK_EMBEDDINGAPI_TC}
 	do
-		cd ${embeddingapi_tc}
+		cd ${CTS_DIR}/${embeddingapi_tc}
 		rm -fv *.zip
 		git clean -dfx .
 
@@ -112,7 +114,7 @@ cov_build_embeddingapi_tc() {
 
 	for usecase_embeddingapi in ${XWALK_USECASE_EMBEDDING_TC}
 	do
-		cd ${usecase_embeddingapi}
+		cd ${CTS_DIR}/${usecase_embeddingapi}
 		rm -fv *.zip
 		git clean -dfx .
 

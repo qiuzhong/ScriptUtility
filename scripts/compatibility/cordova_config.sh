@@ -2,17 +2,19 @@
 # Need to update!
 ###############################################################################
 
-N_PLUS1_VER="18.46.474.0"
-N_VER="17.46.448.6"
+N_VER="17.46.448.0"
 N_1_VER="16.45.421.19"
 N_2_VER="15.44.384.13"
 N_3_VER="14.43.343.25"
+N_4_VER="14.43.343.25"
+N_PLUS_1_VER="18.46.470.0"
 
-NPLUS1="18"
 N="17"
 N1="16"
 N2="15"
 N3="14"
+N4="13"
+NPLUS1="18"
 
 ALPHA="release-testing"
 ALPHA_1="1.5.0"
@@ -53,7 +55,7 @@ GRADLE="platforms/android/xwalk.gradle"
 # Need to update!
 ###############################################################################
 
-DEST_DIR="/home/orange/01_qiuzhong/temp/compatibility/17"
+DEST_DIR="/home/orange/01_qiuzhong/temp/compatibility/16"
 
 ###############################################################################
 # End to update!
@@ -93,52 +95,23 @@ embeddingapi/embedding-asyncapi-android-tests
 ###############################################################################
 CORDOVA_CIRC_URL="https://github.com/flackr/circ.git"
 CORDOVA_EH_URL="https://github.com/MobileChromeApps/workshop-cca-eh.git"
-CORDOVA_MOBILESPEC_URL="https://github.com/apache/cordova-mobile-spec.git"
-CORDOVA_COHO_URL="https://github.com/apache/cordova-coho.git"
+CORDOVA_MOBILESPEC_URL="https://github.com/crosswalk-project/crosswalk-test-suite.git"
 
 CORDOVA_SAMPLE_APPS_TC="
-cordova/cordova-sampleapp-android-tests
-"
-
-USECASE_CORDOVA_TC="
-usecase/usecase-cordova-android-tests
-"
-
-CORDOVA_FEATURE_TC="
 cordova/cordova-appsecurityapi-android-tests
 cordova/cordova-feature-android-tests
+cordova/cordova-sampleapp-android-tests
 cordova/cordova-webapp-android-tests
 "
 
-N1_CORDOVA_SAMPLE_APPS="
+CORDOVA_SAMPLE_APPS="
 helloworld
+"
+
+USECASE_CORDOVA="
+usecase/usecase-cordova-android-tests
+"
+
+CORDOVA_API="
 mobilespec
-privateNotes
-remotedebugging
-renamePkg
-spacedodge
-statusbar
-xwalkCommandLine
-"
-
-N2_CORDOVA_SAMPLE_APPS="
-helloworld
-remotedebugging
-renamePkg
-spacedodge
-statusbar
-xwalkCommandLine
-"
-
-N3_CORDOVA_SAMPLE_APPS="
-gallery
-helloworld
-remotedebugging
-"
-
-MOBILESPEC_APP="mobilespec"
-
-CCA_SAMPLE_APPS="
-CIRC
-Eh
 "
