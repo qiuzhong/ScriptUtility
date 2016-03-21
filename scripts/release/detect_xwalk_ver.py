@@ -48,23 +48,9 @@ class ConfigLoader:
 class XWalkDetector:
 
     def __init__(self):
-        self.config = 
+        self.config = None
         self.arch = None
         self.xwalk = None
-
-
-    def check(self, arch = None):
-        assert self.arch is not None, 'Please config the architecture first!'
-
-        if arch and self.arch and arch in self.arch:
-            for component in self.config.get_configuration
-        else:
-            pass
-
-
-    def check_all(self):
-        pass
-
 
 
 

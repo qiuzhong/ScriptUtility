@@ -1,5 +1,9 @@
 {
-    "IMAGES_DIR": "/home/orange/00_jiajia/images/linux-ftp.sh.intel.com/pub/mirrors/01org/crosswalk/releases/crosswalk/android",
+    "XWALK_IMAGE_DIR": "~/00_jiajia/images/linux-ftp.sh.intel.com/pub/mirrors/01org/crosswalk/releases/crosswalk/android",
+    "CROSSWALK_APP_TOOLS_CACHE_DIR": "~/xwalk_zip",
+    "PKG_TOOLS_DIR": "~/00_jiajia/work_space/release/pkg_tools",
+    "PKG_TOOLS_DIR64": "~/00_jiajia/work_space/release/pkg_tools_64",
+    "PKG_TOOLS_LITE_DIR": "~/00_jiajia/work_space/release/pkg_tools_lite",
     "branch_options": ["beta", "canary", "stable"],
 
     "xwalk": {
