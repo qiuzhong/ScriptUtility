@@ -57,3 +57,23 @@ export CROSSWALK_APP_TOOLS_CACHE_DIR=/home/apple/workspace/apple/pkg_tools_zip
 ```Bash
 $ sudo cnpm install -g cordova --verobse
 ```
+
+### Install necessary tools for deb build
+If you encounter this error:
+> debuild: not found
+
+You can fix it by:
+
+```Bash
+$ sudo apt-get install devscripts
+```
+
+When you encounter this error:
+> debuild: fatal error at line 1364:
+> dpkg-buildpackage -rfakeroot -D -us -uc failed
+
+You can fix it by:
+
+```Bash
+$ sudo apt-get install debhelper
+```
