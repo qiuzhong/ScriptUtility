@@ -80,6 +80,8 @@ Locate your Git Shell path, and find the git command path, then append it to the
 > C:\Users\User\AppData\Local\GitHub\PortableGit_25d850739bc178b2eb13c3e2a9faafea2f9143c0\cmd
 > C:\Users\User\AppData\Local\GitHub\PortableGit_25d850739bc178b2eb13c3e2a9faafea2f9143c0\usr\bin
 
+Set the second path before the system command path, as find is both in git-shell and Windows.
+
 ## Add WiX Toolset to the path
 
 > C:\Program Files (x86)\WiX Toolset v3.10\bin
