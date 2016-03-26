@@ -77,5 +77,9 @@ $ git clone https://github.com/01org/AppSecurityApi.git
 
 Locate your Git Shell path, and find the git command path, then append it to the path environment
 
+> C:\Users\User\AppData\Local\GitHub\PortableGit_25d850739bc178b2eb13c3e2a9faafea2f9143c0\cmd
+> C:\Users\User\AppData\Local\GitHub\PortableGit_25d850739bc178b2eb13c3e2a9faafea2f9143c0\bin
+
 ## Add WiX Toolset to the path
 
+> C:\Program Files (x86)\WiX Toolset v3.10\bin
