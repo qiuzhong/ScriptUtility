@@ -1,0 +1,25 @@
+﻿2016-01-26: Remove the following test suites as request https://github.com/crosswalk-project/crosswalk-test-suite/pull/3294
+					tct-vibration-w3c-tests					
+					webapi-webcl-nonw3c-tests
+2016-03-08: Add webapi/webapi-realsense-xwalk-tests
+2016-03-08: Add
+					wrt/wrt-packagemgtmanu-tests
+					wrt/wrt-packagemgt-windows-tests
+					wrt/wrt-rtcoremanu-tests
+					wrt/wrt-securitymanu-tests
+					wrt/wrt-uxmanu-tests
+					webapi/webapi-appsecurity-external-tests
+					usecase/usecase-extension-windows-tests(do follow the instructions in README.md file.)
+2016-03-18: 1. Crosswalk-<VERSION>.zip has been renamed as crosswalk64-<VERSION>.zip from 19.48.498.0
+						Before we packing the test suites for Windows, we should:
+						1. unzip the zip
+						2. rename the directory as crosswalk-<VERSION>
+						3. zip the directory as crosswalk-<VERSION>.zip and copy to tools
+						
+					 2. Update the following repos in C:/xwalk before we pack the sampleapp for Windows:
+						1. crosswalk-samples
+						2. crosswalk-demos
+						3. HexGL
+										
+2016-03-26: Remove
+						webapi/tct-mediacapture-w3c-tests

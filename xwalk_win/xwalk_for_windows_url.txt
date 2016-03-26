@@ -1,1 +1,1 @@
-https://download.01.org/crosswalk/releases/crosswalk/windows/canary/17.46.443.0/crosswalk-17.46.443.0.zip
+https://download.01.org/crosswalk/releases/crosswalk/windows/canary/19.48.503.0/crosswalk64-19.48.503.0.zip

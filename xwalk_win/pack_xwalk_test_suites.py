@@ -56,14 +56,14 @@ def pack_test_suites(test_suite_list):
 			if not os.path.exists(abs_zip_path):
 				print('not exist!')
 				os.system('python %s -t msi' % os.path.join(XWALK_DIR,
-						'crosswalk-test-suite', 'tools', 'build', 'pack_windows.py'))
+						'crosswalk-test-suite', 'tools', 'build', 'pack.py'))
 				if glob.glob('*.zip'):
 					os.system('mv *.zip %s' % ZIP_DIR)
 
 			else:
 				print('%s already exists!' % (abs_zip_path))
-				with open(os.path.join(PWD, 'fail_tc.txt'), 'w+') as fail_obj:
-					fail_obj.write(line)
+				# with open(os.path.join(PWD, 'fail_tc.txt'), 'w+') as fail_obj:
+				# 	fail_obj.write(line)
 
 
 

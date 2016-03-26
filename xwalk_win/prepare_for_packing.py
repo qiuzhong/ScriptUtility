@@ -9,8 +9,9 @@ def update_code(root_dir):
 	os.system('git pull')
 
 
-def download_xwalk_sdk(http_proxy, sdk_bin_dir):
-	url_file = 'xwalk_for_windows_url.txt'
+def download_xwalk_sdk(http_proxy, root_dir, sdk_bin_dir):
+	url_file = os.path.join(root_dir, 'xwalk_for_windows_url.txt')
+	print url_file
 	sdk_url = None
 	with open(url_file) as f:
 		sdk_url = f.read().strip().split('\n')[-1]
@@ -36,6 +37,7 @@ def update_xwalk_version(cts_dir, xwalk_version):
 	with open(VERSION, 'rb') as f:
 		data = json.load(f, encoding = 'utf-8')
     	data['main-version'] = xwalk_version
+    	data['crosswalk-branch'] = 'canary'
 	
 	with open(VERSION, 'wb') as f:
 		json.dump(data, f, encoding = 'utf-8', indent = 4)
@@ -63,12 +65,28 @@ def update_xwalk_app_tools():
 	# Do not use the crosswalk-app-tools on github
 	os.system('npm update crosswalk-app-tools -g --verbose')
 
+def update_samples_app_code():
+
+	samples_app_dirs = [
+		r'C:\xwalk\crosswalk-samples',
+		r'C:\xwalk\crosswalk-demos',
+		r'C:\xwalk\demo-express',
+		r'C:\xwalk\HexGL',
+		r'C:/xwalk/dependency/AppSecurityApi'
+	]
+	
+	for samples_app_dir in samples_app_dirs:
+		os.chdir(samples_app_dir)
+		os.system('git pull')
+
 
 if __name__ == '__main__':
 	cts_dir = r"C:\xwalk\crosswalk-test-suite"
 	sdk_bin_dir = r"C:\xwalk\release\crosswalk_binary"
 	http_proxy = 'child-prc.intel.com:913'
 	xwalk_ver_file = 'xwalk_version.txt'
+
+	root_dir = os.getcwd()
 
 	try:
 		with open(xwalk_ver_file) as f:
@@ -78,9 +96,10 @@ if __name__ == '__main__':
 		sys.exit(1)
 
 	# update_xwalk_app_tools()
-	# update_code(cts_dir)
-	# update_xwalk_version(cts_dir, xwalk_version)
-	# download_xwalk_sdk(http_proxy, sdk_bin_dir)
+	update_code(cts_dir)
+	update_xwalk_version(cts_dir, xwalk_version)
+	update_samples_app_code()
+	# download_xwalk_sdk(http_proxy, root_dir, sdk_bin_dir)
 	# copy_sdk(cts_dir, sdk_bin_dir, xwalk_version)
 	
 
