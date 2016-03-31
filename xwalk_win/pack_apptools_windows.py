@@ -17,7 +17,7 @@ except IOError as e:
 	sys.exit(1)
 
 APPTOOLS_DIR = os.path.join(XWALK_DIR, 'release', 'apptools')
-ZIP_DIR = os.path.join(APPTOOLS_DIR, CROSSWALK_VERSION)
+ZIP_DIR = os.path.join(APPTOOLS_DIR, CROSSWALK_VERSION + '-apptools')
 if not os.path.exists(ZIP_DIR):
 	os.system('mkdir %s' % ZIP_DIR)
 
@@ -47,7 +47,7 @@ def pack_test_suites(test_suite_list):
 				"crosswalk-test-suite", line.strip()).replace('\\', '/')
 			os.chdir(abs_test_suite_path)
 			os.system('python %s -t msi' % os.path.join(XWALK_DIR,
-						'crosswalk-test-suite', 'tools', 'build', 'pack_windows.py'))
+						'crosswalk-test-suite', 'tools', 'build', 'pack.py'))
 			os.system('mv *.zip %s' % ZIP_DIR)
 
 
