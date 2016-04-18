@@ -1,8 +1,6 @@
-# export PATH=/home/orange/crosswalk-app-tools-android/src:$PATH
-
-CTS_DIR="/home/orange/01_qiuzhong/00-crosswalk-project/crosswalk-test-suite-apptools"
-CROSSWALK_DIR32="/data/jiaxxx_shared/pkg_tools"
-CROSSWALK_DIR64="/data/jiaxxx_shared/pkg_tools_64"
+CTS_DIR="/home/banana/01_qiuzhong/workspace/release/crosswalk-test-suite-apptools"
+CROSSWALK_DIR32="/mnt/jiajiax_shared/pkg_tools"
+CROSSWALK_DIR64="/mnt/jiajiax_shared/pkg_tools_64"
 
 APPTOOLS_TC_ANDROID="
 apptools/apptools-android-tests
@@ -15,6 +13,7 @@ usecase/usecase-apptools-tests
 #
 
 MODES="
+embedded
 shared
 "
 
@@ -23,10 +22,15 @@ arm
 x86
 "
 
+MODES64="
+embedded
+"
+
 ARCH64="
 arm64
 x86_64
 "
+
 
 UPDATE_CODE="Yes"
 UPDATE_XWALK_VERSION="Yes"

@@ -45,16 +45,16 @@ init_env() {
 
     cd ${CTS_DIR}/tools
     rm -fr crosswalk
-    if [ $1 == "32" ]; then
-        cp -a ${CROSSWALK_DIR32}/crosswalk-${CROSSWALK_VERSION} ./crosswalk
-    fi
+    # if [ $1 == "32" ]; then
+    #     cp -a ${CROSSWALK_DIR32}/crosswalk-${CROSSWALK_VERSION} ./crosswalk
+    # fi
 
-    if [ $1 == "64" ]; then
-       cp -a ${CROSSWALK_DIR64}/crosswalk-${CROSSWALK_VERSION}-64bit ./crosswalk 
-    fi
-    if [ ! -z ${USE_PATCH} ]; then
-        sed -i 's|PKG_ARCHS = \["x86", "arm"\]|PKG_ARCHS = \["x86", "arm", "x86_64", "arm64"\]|g' ${CTS_DIR}/tools/build/pack.py
-    fi
+    # if [ $1 == "64" ]; then
+    #    cp -a ${CROSSWALK_DIR64}/crosswalk-${CROSSWALK_VERSION}-64bit ./crosswalk 
+    # fi
+    # if [ ! -z ${USE_PATCH} ]; then
+    #     sed -i 's|PKG_ARCHS = \["x86", "arm"\]|PKG_ARCHS = \["x86", "arm", "x86_64", "arm64"\]|g' ${CTS_DIR}/tools/build/pack.py
+    # fi
 
     cd -
 
@@ -75,7 +75,7 @@ pack_apptools_tc32() {
             for arch in ${ARCH32}
             do
                 echo "../../tools/build/pack.py -t apk -m ${mode} -a ${arch}"
-                python ../../tools/build/pack.py -t apk -m ${mode} -a ${arch}
+                ../../tools/build/pack.py -t apk -m ${mode} -a ${arch}
                 if [ -f *.zip ]; then
                     mv -fv *.zip ${DEST_DIR}/${mode}/${arch}
                 fi
@@ -91,12 +91,12 @@ pack_apptools_tc64() {
         cd ${CTS_DIR}/${tc}
         rm -fv *.zip
 
-        for mode in ${MODES}
+        for mode in ${MODES64}
         do
             for arch in ${ARCH64}
             do
                 echo "../../tools/build/pack.py -t apk -m ${mode} -a ${arch}"
-                python ../../tools/build/pack.py -t apk -m ${mode} -a ${arch}
+                ../../tools/build/pack.py -t apk -m ${mode} -a ${arch}
                 if [ -f *.zip ]; then
                     mv -fv *.zip ${DEST_DIR}/${mode}/${arch}
                 fi
@@ -109,9 +109,9 @@ echo "##########################################################################
 echo $(which crosswalk-app)
 echo $(which crosswalk-pkg)
 echo "################################################################################"
-#rm -fr ${DEST_DIR}
-#create_dest_dir
-#init_env 32
-#pack_apptools_tc32
-#init_env 64
+# rm -fr ${DEST_DIR}
+# create_dest_dir
+# init_env
+
+# pack_apptools_tc32
 pack_apptools_tc64

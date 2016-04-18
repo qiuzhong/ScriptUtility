@@ -27,6 +27,13 @@ export ANDROID_HOME=/home/apple/workspace/apple/app/android-sdk-linux
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools:$ANDROID_HOME/platform-tools
 ```
 
+#### NOTICE:
+If you are in a 64-bit Ubuntu Linux system, you need to install the following 32-bit compatible libraries:
+
+```Bash
+$ sudo apt-get install lib32stdc++6 lib32z1
+```
+
 ### Install Node
 ```Bash
 $ tar -xvf node-v4.2.4.tar.gz
