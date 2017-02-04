@@ -1,0 +1,17 @@
+{
+  "name": "iot-rest-api-server",
+  "version": "1.0.0",
+  "description": "iot-rest-api-server tests",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "author": "zhongx.qiu@intel.com",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
